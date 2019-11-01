@@ -4,18 +4,29 @@
   "description": "A small blog app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test jest -t 'validation errors' --verbose --runInBand",
     "start": "node index.js",
-    "watch": "nodemon index.js",
+    "watch": "cross-env NODE_ENV=development nodemon index.js",
     "deploy": "git push heroku master"
   },
   "author": "Zach Smith",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.3",
-    "nodemon": "^1.19.3"
+    "mongoose-unique-validator": "^2.0.3"
+  },
+  "devDependencies": {
+    "cross-env": "^6.0.3",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
