@@ -53,7 +53,6 @@ blogsRouter.delete('/:id', async (request, response) => {
 
   try {
     const decodedToken = jwt.verify(token, process.env.SECRET)
-    const user = await User.findById(decodedToken.id)
     const blog = await Blog.findById(request.params.id)
 
     if (!token || !decodedToken.id) {
@@ -64,8 +63,7 @@ blogsRouter.delete('/:id', async (request, response) => {
       return response.status(401).json({ error: 'You can only deleted blogs you create'})
     }
 
-    console.log('decoded token', decodedToken.id.toString() )
-    console.log('MOTHER FUCKER', blog.user.toString())
+    const user = await User.findById(decodedToken.id)
 
     await Blog.findByIdAndRemove(request.params.id)
     response.status(204).end()
